@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hava Durumu ve Kıyafet Önerisi</title>
+    <style>
+        /* Basit CSS stilleri (Daha iyi görünmesi için) */
+        body { font-family: Arial, sans-serif; margin: 40px; background-color: #f4f4f9; }
+        .container { max-width: 600px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        h1 { color: #333; text-align: center; }
+        form { display: flex; margin-bottom: 20px; }
+        input[type="text"] { flex-grow: 1; padding: 10px; border: 1px solid #ccc; border-radius: 4px 0 0 4px; }
+        button { padding: 10px 15px; background-color: #007bff; color: white; border: none; border-radius: 0 4px 4px 0; cursor: pointer; }
+        .result-box { border: 1px solid #ddd; padding: 15px; margin-top: 20px; border-radius: 4px; background-color: #e9ecef; }
+        .error { color: red; font-weight: bold; }
+        .suggestion { margin-top: 15px; padding: 10px; background-color: #d1ecf1; border: 1px solid #bee5eb; border-radius: 4px; color: #0c5460;}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>☁️ Hava Durumu Sorgulama</h1>
+        
+        <form method="POST">
+            <input type="text" name="location" placeholder="Şehir adı, Posta Kodu veya Enlem,Boylam girin" required>
+            <button type="submit">Sorgula</button>
+        </form>
+        
+        {% if weather %}
+            {% if weather.error %}
+                <p class="error">{{ weather.error }}</p>
+            {% else %}
+                <div class="result-box">
+                    <h2>{{ weather.sehir }}, {{ weather.ulke }}</h2>
+                    <p><strong>Sıcaklık:</strong> {{ weather.sicaklik }}°C</p>
+                    <p><strong>Durum:</strong> {{ weather.durum }}</p>
+                    <p><strong>Rüzgar Hızı:</strong> {{ weather.ruzgar }} km/s</p>
+                    <p><strong>Nem Oranı:</strong> %{{ weather.nem }}</p>
+                </div>
+                
+                <div class="suggestion">
+                    <h3>👕 Kıyafet Önerimiz:</h3>
+                    <p>{{ suggestion }}</p>
+                </div>
+            {% endif %}
+        {% endif %}
+    </div>
+</body>
+</html>
