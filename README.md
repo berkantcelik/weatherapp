@@ -85,5 +85,4 @@ Open your browser and go to `http://127.0.0.1:5000`.
 
 * **API Key Error:** If the API key is not defined, you will see a "FATAL ERROR" warning in the console.
 * **City Not Found:** If an invalid location is entered, an error message will appear on the screen.
-=======
 
