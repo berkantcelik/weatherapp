@@ -1,45 +1,46 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hava Durumu ve Kıyafet Önerisi</title>
+    <title>Weather & Outfit Advisor</title>
     <style>
-        /* Basit CSS stilleri (Daha iyi görünmesi için) */
-        body { font-family: Arial, sans-serif; margin: 40px; background-color: #f4f4f9; }
-        .container { max-width: 600px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
-        h1 { color: #333; text-align: center; }
-        form { display: flex; margin-bottom: 20px; }
-        input[type="text"] { flex-grow: 1; padding: 10px; border: 1px solid #ccc; border-radius: 4px 0 0 4px; }
-        button { padding: 10px 15px; background-color: #007bff; color: white; border: none; border-radius: 0 4px 4px 0; cursor: pointer; }
-        .result-box { border: 1px solid #ddd; padding: 15px; margin-top: 20px; border-radius: 4px; background-color: #e9ecef; }
-        .error { color: red; font-weight: bold; }
-        .suggestion { margin-top: 15px; padding: 10px; background-color: #d1ecf1; border: 1px solid #bee5eb; border-radius: 4px; color: #0c5460;}
+        body { font-family: Arial, sans-serif; margin: 40px; background-color: #f4f4f9; color: #333; }
+        .container { max-width: 600px; margin: auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 6px 12px rgba(0,0,0,0.15); }
+        h1 { color: #007bff; text-align: center; margin-bottom: 25px; }
+        form { display: flex; margin-bottom: 30px; border: 1px solid #ccc; border-radius: 5px; overflow: hidden; }
+        input[type="text"] { flex-grow: 1; padding: 12px; border: none; font-size: 16px; }
+        button { padding: 12px 20px; background-color: #28a745; color: white; border: none; font-size: 16px; cursor: pointer; transition: background-color 0.3s; }
+        button:hover { background-color: #1e7e34; }
+        .result-box { border-left: 5px solid #007bff; padding: 20px; margin-top: 25px; border-radius: 5px; background-color: #e9f2ff; }
+        .error { color: #dc3545; font-weight: bold; background-color: #f8d7da; padding: 15px; border-radius: 5px; }
+        .suggestion-box { margin-top: 20px; padding: 20px; background-color: #fff3cd; border: 1px solid #ffeeba; border-radius: 5px; white-space: pre-wrap; font-size: 15px; line-height: 1.6; }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>☁️ Hava Durumu Sorgulama</h1>
+        <h1>☀️ Weather & Outfit Advisor</h1>
         
         <form method="POST">
-            <input type="text" name="location" placeholder="Şehir adı, Posta Kodu veya Enlem,Boylam girin" required>
-            <button type="submit">Sorgula</button>
+            <input type="text" name="location" placeholder="Enter City, Zip Code, or Lat,Lon" required>
+            <button type="submit">Get Weather</button>
         </form>
         
         {% if weather %}
             {% if weather.error %}
-                <p class="error">{{ weather.error }}</p>
+                <p class="error">Error: {{ weather.error }}</p>
             {% else %}
                 <div class="result-box">
-                    <h2>{{ weather.sehir }}, {{ weather.ulke }}</h2>
-                    <p><strong>Sıcaklık:</strong> {{ weather.sicaklik }}°C</p>
-                    <p><strong>Durum:</strong> {{ weather.durum }}</p>
-                    <p><strong>Rüzgar Hızı:</strong> {{ weather.ruzgar }} km/s</p>
-                    <p><strong>Nem Oranı:</strong> %{{ weather.nem }}</p>
+                    <h2>{{ weather.city }}, {{ weather.country }}</h2>
+                    <p><strong>Temperature:</strong> {{ weather.temp_c }}°C</p>
+                    <p><strong>Condition:</strong> {{ weather.condition }}</p>
+                    <p><strong>Wind Speed:</strong> {{ weather.wind_kph }} km/h</p>
+                    <p><strong>Humidity:</strong> {{ weather.humidity }}%</p>
+                    <p><strong>UV Index:</strong> {{ weather.uv_index }}</p>
                 </div>
                 
-                <div class="suggestion">
-                    <h3>👕 Kıyafet Önerimiz:</h3>
+                <div class="suggestion-box">
+                    <h3>👕 Our Recommendation:</h3>
                     <p>{{ suggestion }}</p>
                 </div>
             {% endif %}
