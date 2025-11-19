@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # ☀️ Weather & Outfit Advisor
 
 This project is a Flask-based web application that takes a location input from the user, queries current weather conditions, and provides **outfit suggestions** based on factors like temperature, wind, humidity, and UV index.
